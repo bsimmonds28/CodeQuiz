@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>Code Quiz</title>
+  </head>
+
+  <body>
+    <main class="topbar">
+      <h4 id="highscores">View Highscores</h4>
+      <h4 id="yourScore"></h4>
+      <h4 id="timer">Timer</h4>
+    </main>
+
+    <section id="display-box">
+      <div data-state="visible" id="header-wrap">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Answer the following questions before the time runs out! Get an answer wrong and lose 3 seconds.</p>
+      </div>
+
+      <div data-state="visible" id="start-wrap">
+        <button id="start-button">Start Quiz</button>
+      </div>
+
+      <div id="answer-wrap">
+        <ol id="answerButtons"></ol>
+      </div>
+
+      <div id="answerStatus-wrap">
+        <h3 id="answerStatus"></h3>
+      </div>
+
+      <div id="form-wrap">
+        <label id="label"></label>
+      </div>
+
+    </section>
+    
+    <script src="./assets/script.js"></script>
+  </body>
+
+  </html>

@@ -1,0 +1,102 @@
+:root {
+    --purple: #7439A8;
+    --liPurple: #BA8FDF;
+    --exLiPurple: #D5BEFA;
+    --darkPurple: #3E1E59;
+    --white: white;
+    --black:  black;
+    --font: sans-serif;
+}
+
+* {
+    font-family: var(--font);
+    background-color: whitesmoke;
+}
+
+#highscores {
+    color: var(--purple);
+    display: inline-flex;
+    position: fixed;
+    top: 15px;
+    left: 25px;
+}
+
+#yourScore {
+    color: var(--purple);
+    font-weight: 300;
+    font-size: smaller;
+    display: inline-flex;
+    position: fixed;
+    top: 40px;
+    left: 25px;
+}
+
+#timer {
+    color: var(--purple);
+    display: inline-flex;
+    position: fixed;
+    top: 15px;
+    right: 25px;
+}
+
+section {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    top: 15%;
+    left: 50%;
+    margin-left: -200px;
+    text-align: center;
+}
+
+#start-button {
+    background-color: var(--purple);
+    color: var(--white);
+    font-size: 16px;
+    border-color: var(--purple);
+    padding: 5px;
+    border-radius: 15%;
+}
+
+li {
+    background-color: var(--exLiPurple);
+    color: var(--darkPurple);
+    font-size: 16px;
+    font-weight: 600;
+    border-color: var(--darkPurple);
+    padding: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 5%;
+    list-style: none;
+}
+
+h3 {
+    margin-top: 25px;
+    color: var(--purple);
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+}
+
+#form-wrap label, input, button {
+    color: var(--darkPurple);
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+}
+
+#form-wrap button {
+    background-color: var(--purple);
+    color: var(--white);
+    border-color: var(--purple);
+    border-radius: 15%;
+}
+
+h4 {
+    margin-top: 25px;
+    color: var(--purple);
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+}
