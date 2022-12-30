@@ -11,3 +11,4 @@ The following shows the layout of the application:
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score.](./assets/screenshot.png)
 
 ## Link
+https://bsimmonds28.github.io/CodeQuiz/
