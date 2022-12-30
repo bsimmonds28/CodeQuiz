@@ -14,11 +14,13 @@ var form = document.querySelector("#label");
 var form = document.querySelector("#input");
 var currentQuestion = 0;
 var score = 0;
-var timeLeft = 30;
+var timeLeft = 20;
 var submitInitials;
 
 //Add event listener to start button - start clock, hide paragraph, and bring up first question
 startButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
   countdown();
 
   header.setAttribute("data-state", "hidden");
@@ -37,7 +39,8 @@ function countdown() {
         if(timeLeft >= 1) {
         timerEl.textContent = "Timer: " + timeLeft;
         timeLeft--;
-        } else {
+        } else if (timeLeft == 0) {
+        timerEl.textContent = "You ran out of time!";
         clearInterval(timeInterval);
         gameOver();
         }
@@ -49,29 +52,29 @@ function countdown() {
 //Create questions
 var questions = [
     {
-        question: "What day is it?",
-        answers: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        correctAnswer: "Thursday"
+        question: "What do we use to structure our webpage?",
+        answers: ["HTML", "Javascript", "CSS", "Python"],
+        correctAnswer: "HTML"
     },
     {
-        question: "What month is it?",
-        answers: ["November", "December", "January", "February"],
-        correctAnswer: "December"
+        question: "What do we use to style our webpage?",
+        answers: ["HTML", "Javascript", "CSS", "Python"],
+        correctAnswer: "CSS"
     },
     {
-        question: "What year is it?",
-        answers: ["2020", "2021", "2022", "2023"],
-        correctAnswer: "2022"
+        question: "What is NOT an example of a logical operator?",
+        answers: ["&&", "||", "!", "P"],
+        correctAnswer: "P"
     },
     {
-        question: "What time is it?",
-        answers: ["1:00", "2:00", "3:00", "4:00"],
-        correctAnswer: "2:00"
+        question: "What is NOT a type of variable?",
+        answers: ["String", "Cosmo", "Boolean", "Number"],
+        correctAnswer: "Cosmo"
     },
     {
-        question: "What holiday is it?",
-        answers: ["Easter", "Juneteenth", "Indigenous People's Day", "New Year"],
-        correctAnswer: "New Year"
+        question: "What is an example of a conditional statement?",
+        answers: ["if", "else if", "switch", "All of the above"],
+        correctAnswer: "All of the above"
     }
 ]
 
@@ -121,12 +124,16 @@ function quizQuestion() {
         li4.textContent = questions[currentQuestion].answers[3];
         answerButtons.appendChild(li4); 
     } else {
+        timeLeft = -1;
+        timerEl.textContent = "You beat the clock!";
         gameOver();
     }
 }
 
 //Notify player if they got the answer right and update score
 answerList.addEventListener("click", function(event) {
+    event.preventDefault();
+
     var questionNumber = currentQuestion + 1;
 
     if (event.target.textContent === questions[currentQuestion].correctAnswer){
@@ -145,12 +152,7 @@ answerList.addEventListener("click", function(event) {
 });
 
 //highscores variable
-var highscores = [
-    {
-        initials: "",
-        score: 0,
-    }
-];
+var highscores = [];
 
 //Create form to collect initials
 function gameOver() {
@@ -168,30 +170,48 @@ function gameOver() {
     label.appendChild(submitInitials);
 };
 
-//Save initials to highscore
+//Save initials to highscore (store)
 formWrap.addEventListener("click", function(event) {    
+    event.preventDefault();
     var element = event.target;
 
     if (element.matches("button") === true) {
         var yourhighscoretemp = {
             initials: input.value.trim(),
-            score: score,
+            score: score
         }
-        //localstorage.getItem (get it, hold onto it, put it all back)
-        localStorage.setItem("yourhighscoretemp", JSON.stringify(yourhighscoretemp));
-        var yourhighscoretemp = JSON.parse(localStorage.getItem("yourhighscoretemp"));
         highscores.push(yourhighscoretemp);
+        input.value = "";
+        
+        storeTempScore();
 
-        var viewYourScore = document.createElement("h4");
+        var viewYourScore = document.createElement("h5");
         viewYourScore.textContent = "Your Score: " + yourhighscoretemp.initials + " - " + yourhighscoretemp.score;
         label.appendChild(viewYourScore);
     }
-
-    console.log(highscores);
 });
 
-//Create highscore button to display list of highscores
+function storeTempScore() {
+    //localstorage.getItem (set it, hold onto it, put it all back)
+    //Use .setItem() to put object in storage and JSON.stringify to convert it as a string
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+}
+
+function init(){
+    //Use JSON.parse() to convert text to JavaScript object
+    var yourhighscoreStored = JSON.parse(localStorage.getItem("highscores"));
+
+    if (yourhighscoreStored !== null){
+        highscores = yourhighscoreStored;
+        console.log(highscores);
+    };
+}
+init();
+
+//Create highscore button to display list of highscores (render)
 function viewHighScores() {
+    input.value = "";
+    
     for (var i = 0; i < highscores.length; i++) {
         var highscoreinitials = highscores[i].initials;
         var highscoreScore = highscores[i].score
@@ -204,6 +224,7 @@ function viewHighScores() {
 
 //Add event listener to viewHighScores
 highscoresButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    //init();
     viewHighScores();
 });
-
